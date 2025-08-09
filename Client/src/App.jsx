@@ -20,8 +20,10 @@ function App() {
   console.log({onlineUsers});
 
   useEffect(() => {
+
+     document.documentElement.setAttribute("data-theme", theme);
     checkAuth();
-  }, [checkAuth]);
+  }, [checkAuth, theme]);
 
 
   if(isCheckingAuth && !authUser) {
@@ -33,7 +35,7 @@ function App() {
   }
 
   return (
-    <div data-theme={theme} className="">
+    <div className="">
       <Toaster richColors position="top-right"/>
         <Navbar />
         <Routes>
