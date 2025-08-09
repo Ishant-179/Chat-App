@@ -23,8 +23,10 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [ "http://localhost:5174",
-  "https://chat-app-pkoz.onrender.com"],
+    origin: [
+  "https://chat-app-pkoz.onrender.com",
+   "http://localhost:5174"
+],
     credentials: true,
   })
 );
