@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:5174",
-  "https://your-production-frontend-domain.com"
+  "https://chat-app-pkoz.onrender.com/"
 ];
 
 app.use(
