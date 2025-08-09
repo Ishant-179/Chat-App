@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:5174",
-  "https://chat-app-pkoz.onrender.com/"
+  "https://chat-app-pkoz.onrender.com"
 ];
 
 app.use(
@@ -45,7 +45,7 @@ app.use("/api/messages", messageRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../Client/dist")));
 
-  app.get("/*", (req, res) => {
+  app.get((req, res, next) => {
     res.sendFile(path.join(__dirname, "../Client", "dist", "index.html"));
   });
 }
