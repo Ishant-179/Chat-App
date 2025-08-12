@@ -25,17 +25,13 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow server-to-server or same-origin
-    const normalizedOrigin = origin.replace(/\/$/, ""); // remove trailing slash
-    if (allowedOrigins.includes(normalizedOrigin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
+    if (!origin) return callback(null, true); // server-to-server or same-origin requests
+    const normalized = origin.replace(/\/$/, ""); // remove trailing slash
+    if (allowedOrigins.includes(normalized)) return callback(null, true);
+    callback(new Error("Not allowed by CORS"));
   },
   credentials: true
 }));
-
 
 app.get("/", (req, res) => {
   res.send("Backend API is running...");
