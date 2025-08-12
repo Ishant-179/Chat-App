@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 
 const allowedOrigins = [
-  "https://chat-app-pkoz.onrender.com",
+  "https://chat-app-m8a5.vercel.app",
   "http://localhost:5173"
 ];
 
