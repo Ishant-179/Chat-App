@@ -18,22 +18,9 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 
 
-const allowedOrigins = [
-  "https://chat-app-m8a5.vercel.app",
-  "http://localhost:5173"
-];
-
 app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin (like mobile apps, curl)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true,
+  origin: process.env.CLIENT_URL,
+  credentials: true
 }));
 
 app.use("/api/auth", authRoutes);
