@@ -18,13 +18,24 @@ app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 
 
+const allowedOrigins = [
+  "https://chat-app-gk96.vercel.app",
+  "http://localhost:5173"
+];
+
 app.use(cors({
-  origin: [
-      "https://chat-app-gk96.vercel.app",
-      "http://localhost:5173",
-    ],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // allow server-to-server or same-origin
+    const normalizedOrigin = origin.replace(/\/$/, ""); // remove trailing slash
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
+
 
 app.get("/", (req, res) => {
   res.send("Backend API is running...");
